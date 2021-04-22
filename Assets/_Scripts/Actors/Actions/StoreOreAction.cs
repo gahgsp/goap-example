@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StoreOreAction : GOAPAction
 {
-
     private bool _storedOre;
 
     public StoreOreAction()
@@ -17,7 +16,7 @@ public class StoreOreAction : GOAPAction
     public override bool CheckProceduralPreconditions(GameObject agent)
     {
         VillageCenter villageCenter = FindObjectOfType<VillageCenter>();
-        SetTarget(villageCenter.gameObject);
+        Target = villageCenter.gameObject;
         return villageCenter != null;
     }
 
@@ -42,17 +41,5 @@ public class StoreOreAction : GOAPAction
     public override void Reset()
     {
         this._storedOre = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

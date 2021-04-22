@@ -15,7 +15,8 @@ public abstract class GOAPAction : MonoBehaviour
     // Can be null.
     private GameObject _target;
 
-    private float _cost;
+    // The cost to do this action.
+    private int _cost;
 
     public GOAPAction()
     {
@@ -26,7 +27,7 @@ public abstract class GOAPAction : MonoBehaviour
     public void DoReset()
     {
         _inRange = false;
-        _target = null;
+        Target = null;
         Reset();
     }
 
@@ -61,23 +62,23 @@ public abstract class GOAPAction : MonoBehaviour
 
     public bool IsInRange()
     {
-        return _inRange;
+        return this._inRange;
     }
 
     public void SetInRange(bool inRange)
     {
-        _inRange = inRange;
+        this._inRange = inRange;
     }
 
     public void AddPreCondition(string key, object value)
     {
-        _preconditions.Add(new KeyValuePair<string, object>(key, value));
+        this._preconditions.Add(new KeyValuePair<string, object>(key, value));
     }
 
     public void RemovePreCondition(string key)
     {
         KeyValuePair<string, object> toRemove = default(KeyValuePair<string, object>);
-        foreach (KeyValuePair<string, object> precondition in _preconditions)
+        foreach (KeyValuePair<string, object> precondition in this._preconditions)
         {
             if (precondition.Key.Equals(key))
             {
@@ -86,37 +87,26 @@ public abstract class GOAPAction : MonoBehaviour
         }
         if (!default(KeyValuePair<string, object>).Equals(toRemove))
         {
-            _preconditions.Remove(toRemove);
+            this._preconditions.Remove(toRemove);
         }
     }
 
     public HashSet<KeyValuePair<string, object>> GetPreConditions()
     {
-        return _preconditions;
+        return this._preconditions;
     }
 
     public void AddEffect(string key, object value)
     {
-        _effects.Add(new KeyValuePair<string, object>(key, value));
+        this._effects.Add(new KeyValuePair<string, object>(key, value));
     }
 
     public HashSet<KeyValuePair<string, object>> GetEffects()
     {
-        return _effects;
+        return this._effects;
     }
 
-    public float GetCost()
-    {
-        return _cost;
-    }
+    public int Cost { get => _cost; set => _cost = value; }
 
-    public GameObject GetTarget()
-    {
-        return _target;
-    }
-
-    public void SetTarget(GameObject target)
-    {
-        _target = target;
-    }
+    public GameObject Target { get => _target; set => _target = value; }
 }

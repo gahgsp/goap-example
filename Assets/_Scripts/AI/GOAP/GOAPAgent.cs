@@ -98,7 +98,7 @@ public class GOAPAgent : MonoBehaviour
         _moveToState = (fsm, owner) =>
         {
             GOAPAction currentAction = _currentPlanActions.Peek();
-            if (currentAction.RequiresInRange() && currentAction.GetTarget() == null)
+            if (currentAction.RequiresInRange() && currentAction.Target == null)
             {
                 fsm.PopState(); // Move State
                 fsm.PopState(); // Perform State

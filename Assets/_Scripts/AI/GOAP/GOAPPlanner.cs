@@ -82,7 +82,7 @@ public class GOAPPlanner
             {
                 // Apply the current Action's Effects to the Parent State.
                 HashSet<KeyValuePair<string, object>> currentState = PopulateState(parent.state, action.GetEffects());
-                Node node = new Node(parent, parent.cost + action.GetCost(), currentState, action);
+                Node node = new Node(parent, parent.cost + action.Cost, currentState, action);
                 if (InState(goal, currentState))
                 {
                     // Nice! We found a solution!
