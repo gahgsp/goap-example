@@ -26,8 +26,8 @@ public class RestAction : GOAPAction
 
     public override bool Perform(GameObject agent)
     {
-        Miner miner = agent.GetComponent<Miner>(); // TO-DO: This should be a Villager class, not a specific implementation.
-        miner.Stamina = 100;
+        Villager villager = agent.GetComponent<Villager>();
+        villager.Stamina = 100;
         this._rested = true;
         return true;
     }
