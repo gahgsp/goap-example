@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourcesBag : MonoBehaviour
+public class Tree : MonoBehaviour
 {
-
-    public int qtyOre = 0;
-    public int qtyLogs = 0;
-
     // Start is called before the first frame update
     void Start()
     {

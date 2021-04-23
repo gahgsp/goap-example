@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoreOreAction : GOAPAction
+public class StoreWoodAction : GOAPAction
 {
-    private bool _storedOre;
 
-    public StoreOreAction()
+    private bool _storedWood = false;
+
+    public StoreWoodAction()
     {
-        AddPreCondition("HasOre", true);
-        AddEffect("HasOre", false);
-        AddEffect("MineOre", true);
+        AddPreCondition("HasLogs", true);
+        AddEffect("HasLogs", false);
+        AddEffect("CutWood", true);
     }
 
     public override bool CheckProceduralPreconditions(GameObject agent)
@@ -22,14 +23,14 @@ public class StoreOreAction : GOAPAction
 
     public override bool IsDone()
     {
-        return this._storedOre;
+        return this._storedWood;
     }
 
     public override bool Perform(GameObject agent)
     {
         ResourcesBag backpack = gameObject.GetComponent<ResourcesBag>();
-        backpack.qtyOre = 0;
-        this._storedOre = true;
+        backpack.qtyLogs = 0;
+        this._storedWood = true;
         return true;
     }
 
@@ -40,7 +41,7 @@ public class StoreOreAction : GOAPAction
 
     public override void Reset()
     {
-        this._storedOre = false;
+        this._storedWood = false;
         Target = null;
     }
 }

@@ -5,11 +5,14 @@ using UnityEngine;
 public class RestAction : GOAPAction
 {
     private bool _rested;
+    private float _timeToRest = 8f;
+    private float _elapsedTimeResting = 0f;
 
     public RestAction()
     {
         AddPreCondition("HasStamina", false);
         AddEffect("MineOre", true);
+        AddEffect("CutWood", true);
     }
 
     public override bool CheckProceduralPreconditions(GameObject agent)
@@ -26,9 +29,13 @@ public class RestAction : GOAPAction
 
     public override bool Perform(GameObject agent)
     {
-        Villager villager = agent.GetComponent<Villager>();
-        villager.Stamina = 100;
-        this._rested = true;
+        this._elapsedTimeResting += Time.deltaTime;
+        if (this._elapsedTimeResting >= this._timeToRest)
+        {
+            Villager villager = agent.GetComponent<Villager>();
+            villager.Stamina = 100;
+            this._rested = true;
+        }
         return true;
     }
 
@@ -40,6 +47,7 @@ public class RestAction : GOAPAction
     public override void Reset()
     {
         this._rested = false;
+        this._elapsedTimeResting = 0f;
         Target = null;
     }
 }

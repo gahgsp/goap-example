@@ -15,6 +15,7 @@ public abstract class Villager : MonoBehaviour, IGOAP
     {
         HashSet<KeyValuePair<string, object>> worldInformation = new HashSet<KeyValuePair<string, object>>();
         worldInformation.Add(new KeyValuePair<string, object>("HasOre", gameObject.GetComponent<ResourcesBag>().qtyOre > 0));
+        worldInformation.Add(new KeyValuePair<string, object>("HasLogs", gameObject.GetComponent<ResourcesBag>().qtyLogs > 0));
         worldInformation.Add(new KeyValuePair<string, object>("HasStamina", this._stamina > 0));
         return worldInformation;
     }
