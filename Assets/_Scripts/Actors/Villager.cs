@@ -16,8 +16,6 @@ public abstract class Villager : MonoBehaviour, IGOAP
 
     public abstract HashSet<KeyValuePair<string, object>> CreateGoalState();
 
-    public void FinishedActions() {}
-
     public HashSet<KeyValuePair<string, object>> GetWorldState()
     {
         HashSet<KeyValuePair<string, object>> worldInformation = new HashSet<KeyValuePair<string, object>>();
@@ -45,11 +43,22 @@ public abstract class Villager : MonoBehaviour, IGOAP
 
     }
 
-    public void PlanAborted(GOAPAction aborterAction) {}
+    public void FinishedActions() { 
+        // All the actions for the plan were finished.
+    }
 
-    public void PlanFailed(HashSet<KeyValuePair<string, object>> failedGoal) {}
+    public void PlanAborted(GOAPAction aborterAction) {
+        // An action for the current plan wasn't completed.
+        // After that, we will go back to the planning phase again.
+    }
 
-    public void PlanFound(HashSet<KeyValuePair<string, object>> goal, Queue<GOAPAction> actions) {}
+    public void PlanFailed(HashSet<KeyValuePair<string, object>> failedGoal) {
+        // Nothing to do here as we ensure that our plans will always succeed.
+    }
+
+    public void PlanFound(HashSet<KeyValuePair<string, object>> goal, Queue<GOAPAction> actions) {
+        // Good job! We have found a plan!
+    }
 
     public int Stamina { get => _stamina; set => _stamina = value; }
 }
