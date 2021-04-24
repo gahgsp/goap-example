@@ -29,7 +29,14 @@ public class StoreWoodAction : GOAPAction
     public override bool Perform(GameObject agent)
     {
         ResourcesBag backpack = gameObject.GetComponent<ResourcesBag>();
+
+        // Add the collected wood logs quantity to the village center...
+        VillageCenter villageCenter = FindObjectOfType<VillageCenter>();
+        villageCenter.CurrentWood += backpack.qtyLogs;
+
+        // Then remove the wood logs from the backpack.
         backpack.qtyLogs = 0;
+
         this._storedWood = true;
         return true;
     }

@@ -7,6 +7,13 @@ public abstract class Villager : MonoBehaviour, IGOAP
     private int _stamina = 100;
     private float _moveSpeed = 5f;
 
+    private VillageCenter _villageCenter;
+
+    private void Awake()
+    {
+        this._villageCenter = FindObjectOfType<VillageCenter>();
+    }
+
     public abstract HashSet<KeyValuePair<string, object>> CreateGoalState();
 
     public void FinishedActions() {}
@@ -17,6 +24,8 @@ public abstract class Villager : MonoBehaviour, IGOAP
         worldInformation.Add(new KeyValuePair<string, object>("HasOre", gameObject.GetComponent<ResourcesBag>().qtyOre > 0));
         worldInformation.Add(new KeyValuePair<string, object>("HasLogs", gameObject.GetComponent<ResourcesBag>().qtyLogs > 0));
         worldInformation.Add(new KeyValuePair<string, object>("HasStamina", this._stamina > 0));
+        worldInformation.Add(new KeyValuePair<string, object>("HasEnoughOreForTemple", this._villageCenter.CurrentOre >= 10));
+        worldInformation.Add(new KeyValuePair<string, object>("HasEnoughWoodForTemple", this._villageCenter.CurrentWood >= 10));
         return worldInformation;
     }
 

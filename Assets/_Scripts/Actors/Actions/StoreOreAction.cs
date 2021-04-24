@@ -28,7 +28,14 @@ public class StoreOreAction : GOAPAction
     public override bool Perform(GameObject agent)
     {
         ResourcesBag backpack = gameObject.GetComponent<ResourcesBag>();
+
+        // Add the collected ore quantity to the village center...
+        VillageCenter villageCenter = FindObjectOfType<VillageCenter>();
+        villageCenter.CurrentOre += backpack.qtyOre;
+
+        // Then remove the ore from the backpack.
         backpack.qtyOre = 0;
+
         this._storedOre = true;
         return true;
     }

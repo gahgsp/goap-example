@@ -5,7 +5,10 @@ using UnityEngine;
 public class VillageCenter : MonoBehaviour
 {
 
-    public int currentOre;
-    public int maxOre;
+    private int _currentOre;
+    private int _currentWood;
 
+    public int CurrentOre { get => _currentOre; set => _currentOre = value; }
+
+    public int CurrentWood { get => _currentWood; set => _currentWood = value; }
 }
